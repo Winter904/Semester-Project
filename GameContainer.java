@@ -1,6 +1,6 @@
 import java.util.Map;
 import java.util.HashMap;
-// comment
+
 public class GameContainer {
     private String name;
     private String descriptionClosed;
@@ -92,5 +92,6 @@ public class GameContainer {
     }
 
 }
+
 
 
