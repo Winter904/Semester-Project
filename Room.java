@@ -2,6 +2,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Room {
+    //test
     private String name;
     private String description;
     private Map<String, GameObject> objects;
