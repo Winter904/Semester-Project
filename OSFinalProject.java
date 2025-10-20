@@ -1,4 +1,7 @@
-/* This is the beginning of a great text-based adventure game!! */
+//------------------------------------------------------------
+// Main Class, houses the main game loop and the creation of rooms, items, objects, etc
+//------------------------------------------------------------
+
 
 // Main class
 import java.util.Scanner;
@@ -18,18 +21,18 @@ public class OSFinalProject {
         // GAMEOBJECT LIST
         GameMachine copperMachine = new GameMachine("Copper Machine", "A large, quiet, copper machine with buttons and levers.", "A large, humming, copper machine with buttons and levers.", false);
         GameObject sign = new GameObject("Wooden Sign", "A wooden sign with faded text.", false);
-        GameContainer chest = new GameContainer("Iron Chest", "An old rusting chest of some kind. It appears to be closed", "An old rusting chest of some kind. It has been opened.", false, false, true);
+        GameContainer chest = new GameContainer("Iron Chest", "An old rusting chest of some kind. It appears to be closed", "An old rusting chest of some kind. It has been opened.","An old rusting chest of some kind. It has a silver key sitting inside.", false, false);
         
         // GAME ITEM LIST
         Inventory inv = new Inventory("Inventory", "Player's Inventory");
-        GameItem key = new GameItem("Silver Key", "A small silver key with intricate designs on its surface.", false, true);
-        GameHeldItem heldKey = new GameHeldItem("Silver Key", "A small silver key with intricate designs on its surface.", false);
+        GameItem silverKey = new GameItem("Silver Key", "A small silver key with intricate designs on its surface.", false, true);
+        GameHeldItem heldSilverKey = new GameHeldItem("Silver Key", "A small silver key with intricate designs on its surface.", false);
 
         startRoom.addMachine(copperMachine);
         startRoom.addObject(sign);
         startRoom.addContainer(chest);
-        chest.addItem(key);
-        inv.addHeldItem(heldKey);
+        chest.addItem(silverKey);
+        inv.addHeldItem(heldSilverKey);
 
 
 
@@ -54,6 +57,7 @@ public class OSFinalProject {
 
             switch (command) {
                 case "look":
+                case "l":
                     if (target.equals("at sign")) {
                         System.out.println(sign.getDescription());
                     } else if (target.equals("at machine")) {
@@ -62,12 +66,10 @@ public class OSFinalProject {
                         System.out.println(startRoom.getDescription());
                     } else if (target.equals("at chest")) {
                         System.out.println(chest.getDescription());
-                        if (chest.getContainsItem() == true && chest.getOpenState() == true) {
-                            System.out.println("It's filled with rubbish except for a shiny silver key sitting near the top");
-                        }
                     }
                     break;
                 case "examine":
+                case "x":
                     if (target.equals("sign")) {
                         System.out.println(sign.getDescription());
                     } else if (target.equals("machine")) {
@@ -76,23 +78,16 @@ public class OSFinalProject {
                         System.out.println(startRoom.getDescription());
                     } else if (target.equals("chest")) {
                         System.out.println(chest.getDescription());
-                        if (chest.getContainsItem() == true && chest.getOpenState() == true) {
-                            System.out.println("It's filled with rubbish except for a shiny silver key sitting near the top");
-                        }
                     }
                     break;
                 case "take":
+                case "t":
                     if (target.equals("key")) {
-                        if (key.getObtainability() == true) {
-                            System.out.println(key.takeItem());
-                            key = null;
-
-                        }
-                        
-                        // add item to inventory
+                        System.out.println(silverKey.takeItem(inv));
                         break;
                     }
                 case "read":
+                case "r":
                     if (target.equals("sign")) {
                         System.out.println(sign.getDescription());
                     } else if (target.equals(null)) {
@@ -115,11 +110,12 @@ public class OSFinalProject {
                     }
                     break;
                 case "open":
+                case "o":
                     if (target.equals("chest")) {
-                        if (chest.getOpenState() == false) {
+                        if (chest.isOpen() == false) {
                             System.out.println(chest.openContainer());
-                            if (chest.getContainsItem() == true) {
-                                key.makeObtainable();
+                            if (chest.hasItem() == true) {
+                                silverKey.makeObtainable();
                             }
                         } else {
                             System.out.println("The chest is already open.");
@@ -129,11 +125,12 @@ public class OSFinalProject {
                         System.out.println("You can't really open that.");
                     }
                 case "close":
+                case "c":
                     if (target.equals("chest")) {
-                        if (chest.getOpenState() == true) {
+                        if (chest.isOpen() == true) {
                             System.out.println(chest.closeContainer());
-                            if (chest.getContainsItem() == true) {
-                                key.makeUnobtainable();
+                            if (chest.hasItem() == true) {
+                                silverKey.makeUnobtainable();
                             }
                         } else {
                             System.out.println("The chest is already closed.");
@@ -143,12 +140,18 @@ public class OSFinalProject {
                         System.out.println("You can't really close that.");
                     }
                 case "unlock":
+                case "u":
                     if (target.equals("chest")) {
                         System.out.println(chest.unlockContainer());
                         break;
                     } else {
                         System.out.println("You can't really unlock that.");
                     }
+                case "inventory":
+                case "inv":
+                case "i":
+                    inv.listInventory();
+                    break;                    
                 case "activatecmd":
                     cmdOn = true;
                     break;
@@ -166,8 +169,8 @@ public class OSFinalProject {
                         } else if (target.equals("chest")) {
                             System.out.println("Name: " + chest.getName());
                             System.out.println("Desc: " + chest.getDescription());
-                            System.out.println("isOpen: " + chest.getOpenState());
-                            System.out.println("isUnlocked: " + chest.getUnlockedState());
+                            System.out.println("isOpen: " + chest.isOpen());
+                            System.out.println("isUnlocked: " + chest.isUnlocked());
                             break;
                         } else if (target.equals("lasttarget")) {
                             System.out.println("lastTarget: " + lastTarget);
@@ -181,6 +184,7 @@ public class OSFinalProject {
                         break;
                     }
                 case "exit":
+                case "quit":
                     exitGame = true;
                     break;
                 default:
