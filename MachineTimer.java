@@ -1,3 +1,7 @@
+//------------------------------------------------------------
+// MachineTimer, seperate Thread that oversees a machine's runtime before it breaks down, interjects in main code when it breaks down
+//------------------------------------------------------------
+
 public class MachineTimer extends Thread {
     private GameMachine machine;
     private int duration;

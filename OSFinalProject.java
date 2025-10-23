@@ -36,6 +36,11 @@ public class OSFinalProject {
 
 
 
+        System.out.println("You find yourself inside a dusty warehouse, filled with old machines and worn down equipment.");
+        System.out.println("There is a worn sign here.");
+        System.out.println("There is a Copper Machine here.");
+        System.out.println("There is a Rusty Chest here.");
+
         // THE GAME
         while (!exitGame) {
             System.out.print("> ");
@@ -98,7 +103,7 @@ public class OSFinalProject {
                     break;
                 case "turn":
                     if (target.equals("on machine")) {
-                        if (copperMachine.getOnState() == false) {
+                        if (copperMachine.isOn() == false) {
                             MachineTimer timer = new MachineTimer(copperMachine, 5000);
                             timer.start();
                         }
@@ -160,7 +165,7 @@ public class OSFinalProject {
                         if (target.equals("machine")) {
                             System.out.println("Name: " + copperMachine.getName());
                             System.out.println("Desc: " + copperMachine.getDescription());
-                            System.out.println("isOn: " + copperMachine.getOnState());
+                            System.out.println("isOn: " + copperMachine.isOn());
                             break;
                         } else if (target.equals("sign")) {
                             System.out.println("Name: " + sign.getName());

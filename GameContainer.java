@@ -94,7 +94,7 @@ public class GameContainer {
     // 10. Open the container
     public String openContainer() {
         if (!isUnlocked) {
-            return "You try to open the " + name + ", but it’s locked.";
+            return "You try to open the " + name + ", but it's locked.";
         }
         if (isOpen) {
             return "The " + name + " is already open.";

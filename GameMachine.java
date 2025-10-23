@@ -1,3 +1,13 @@
+//------------------------------------------------------------
+// GameMachine, contains rules for machine objects (objects that can be turned on/off, and that break down over time)
+// Methods for:
+// 1. getName: Gets machine's name
+// 2. getDescription: Gets machine's description
+// 3. isOn: Gets if machine is on or not
+// 4. turnMachineOn: Turns machine on
+// 5. turnMachineOff: Turns machine off
+//------------------------------------------------------------
+
 public class GameMachine {
     private String name;
     private String descriptionOff;
@@ -11,10 +21,12 @@ public class GameMachine {
         this.isOn = isOn;
     }
 
+    // 1. Gets machine's name
     public String getName() {
         return name;
     }
 
+    // 2. Gets machine's description
     public String getDescription() {
         if (isOn == true) {
             return descriptionOn;
@@ -23,7 +35,8 @@ public class GameMachine {
         }
     }
 
-    public boolean getOnState() {
+    // 3. Gets if machine is on or not
+    public boolean isOn() {
         if (isOn == true) {
             return true;
         } else {
@@ -31,6 +44,7 @@ public class GameMachine {
         }
     }
     
+    // 4. Turns machine on
     public String turnMachineOn() {
         if (isOn == true) {
             return "The " + name + " is already on.";
@@ -40,6 +54,7 @@ public class GameMachine {
         }
     }
 
+    // 5. Turns machine off
     public String turnMachineOff() {
         if (isOn == false) {
             return "The " + name + " is already off.";
