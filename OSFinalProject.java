@@ -156,7 +156,16 @@ public class OSFinalProject {
                 case "inv":
                 case "i":
                     inv.listInventory();
-                    break;                    
+                    break; 
+                case "use":
+                    if (target.equals("computer")) {
+                        System.out.println("You sit down at the computer and power it on...");
+                        Thread computerThread = new Thread(new ComputerMenu());
+                        computerThread.start();
+                    } else {
+                        System.out.println("You can’t use that.");
+                    }
+                    break;                   
                 case "activatecmd":
                     cmdOn = true;
                     break;
