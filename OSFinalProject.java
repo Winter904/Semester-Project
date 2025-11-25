@@ -41,6 +41,7 @@ public class OSFinalProject {
         System.out.println("There is a Copper Machine here.");
         System.out.println("There is a Rusty Chest here.");
         System.out.println("There is an old boxy computer here.");
+        System.out.println("There is glitchy digital panel attached to the wall here.");
 
         // == Performance monitor MXBeans ==
         MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();
@@ -69,6 +70,7 @@ public class OSFinalProject {
                     if (target.equals("at sign")) System.out.println(sign.getDescription());
                     else if (target.equals("at machine")) System.out.println(copperMachine.getDescription());
                     else if (target.equals("at chest")) System.out.println(chest.getDescription());
+                    else if (target.equals("at panel")) System.out.println("A dusty boxy copper panel installed into a nearby wall. It looks like it's hooked up to the building and is displaying performance statistics.");
                     else System.out.println(startRoom.getDescription());
                     break;
 
@@ -77,6 +79,7 @@ public class OSFinalProject {
                     if (target.equals("sign")) System.out.println(sign.getDescription());
                     else if (target.equals("machine")) System.out.println(copperMachine.getDescription());
                     else if (target.equals("chest")) System.out.println(chest.getDescription());
+                    else if (target.equals("at panel")) System.out.println("A dusty boxy copper panel installed into a nearby wall. It looks like it's hooked up to the building and is displaying performance statistics.");
                     else System.out.println(startRoom.getDescription());
                     break;
 
@@ -194,7 +197,7 @@ public class OSFinalProject {
                         } else System.out.println("I don't understand that command.");
                     } else System.out.println("I don't understand that command.");
                     break;
-                    
+
                 case "exit":
                 case "quit":
                     exitGame = true;
