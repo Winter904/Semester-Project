@@ -22,6 +22,7 @@ public class OSFinalProject {
 
         // GAMEOBJECT LIST
         GameMachine copperMachine = new GameMachine("Copper Machine", "A large, quiet, copper machine with buttons and levers.", "A large, humming, copper machine with buttons and levers.", false);
+        GameMachine rustyMachine = new GameMachine("Rusty Machine", "An old, quiet, rusty steel machine worn with use.", "An old, rumbling, rusty steel machine barely functioning.", false);
         GameObject sign = new GameObject("Wooden Sign", "A wooden sign with faded text.", false);
         GameContainer chest = new GameContainer("Iron Chest", "An old rusting chest of some kind. It appears to be closed", "An old rusting chest of some kind. It has been opened.","An old rusting chest of some kind. It has a silver key sitting inside.", false, false);
 
@@ -31,6 +32,7 @@ public class OSFinalProject {
         GameHeldItem heldSilverKey = new GameHeldItem("Silver Key", "A small silver key with intricate designs on its surface.", false);
         
         startRoom.addMachine(copperMachine);
+        startRoom.addMachine(rustyMachine);
         startRoom.addObject(sign);
         startRoom.addContainer(chest);
         chest.addItem(silverKey);
@@ -39,6 +41,7 @@ public class OSFinalProject {
         System.out.println("You find yourself inside a dusty warehouse, filled with old machines and worn down equipment.");
         System.out.println("There is a worn sign here.");
         System.out.println("There is a Copper Machine here.");
+        System.out.println("There is a Rusty Machine here.");
         System.out.println("There is a Rusty Chest here.");
         System.out.println("There is an old boxy computer here.");
         System.out.println("There is glitchy digital panel attached to the wall here.");
@@ -68,7 +71,8 @@ public class OSFinalProject {
                 case "look":
                 case "l":
                     if (target.equals("at sign")) System.out.println(sign.getDescription());
-                    else if (target.equals("at machine")) System.out.println(copperMachine.getDescription());
+                    else if (target.equals("at copper machine")) System.out.println(copperMachine.getDescription());
+                    else if (target.equals("at rusty machine")) System.out.println(rustyMachine.getDescription());
                     else if (target.equals("at chest")) System.out.println(chest.getDescription());
                     else if (target.equals("at panel")) System.out.println("A dusty boxy copper panel installed into a nearby wall. It looks like it's hooked up to the building and is displaying performance statistics.");
                     else System.out.println(startRoom.getDescription());
@@ -78,8 +82,10 @@ public class OSFinalProject {
                 case "x":
                     if (target.equals("sign")) System.out.println(sign.getDescription());
                     else if (target.equals("machine")) System.out.println(copperMachine.getDescription());
+                    else if (target.equals("copper machine")) System.out.println(copperMachine.getDescription());
+                    else if (target.equals("rusty machine")) System.out.println(copperMachine.getDescription());
                     else if (target.equals("chest")) System.out.println(chest.getDescription());
-                    else if (target.equals("at panel")) System.out.println("A dusty boxy copper panel installed into a nearby wall. It looks like it's hooked up to the building and is displaying performance statistics.");
+                    else if (target.equals("panel")) System.out.println("A dusty boxy copper panel installed into a nearby wall. It looks like it's hooked up to the building and is displaying performance statistics.");
                     else System.out.println(startRoom.getDescription());
                     break;
 
