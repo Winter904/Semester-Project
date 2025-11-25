@@ -136,8 +136,40 @@ public class OSFinalProject {
                     if (target.equals("computer")) {
                         System.out.println("You sit down at the computer and power it on...");
                         computerThread.start();
-                    } else System.out.println("You can't use that.");
+                    } 
+                    else if (target.equals("panel")) {
+                        System.out.println("\n=== PERFORMANCE MONITOR ===");
+                        System.out.println("Press ENTER at any time to return.\n");
+
+                        Thread stopper = new Thread(() -> scanner.nextLine());
+                        stopper.start();
+
+                        long startTime = System.currentTimeMillis();
+
+                        while (stopper.isAlive()) {
+                            MemoryUsage heap = memoryBean.getHeapMemoryUsage();
+                            double cpuLoad = osBean.getProcessCpuLoad() * 100;
+                            long uptime = (System.currentTimeMillis() - startTime) / 1000;
+
+                            System.out.printf(
+                                "\rUptime: %ds | Heap: %dMB / %dMB | CPU: %.2f%%   ",
+                                uptime,
+                                heap.getUsed() / 1_000_000,
+                                heap.getMax() / 1_000_000,
+                                cpuLoad
+                            );
+
+                            System.out.flush();
+                            try { Thread.sleep(1000); } catch (InterruptedException e) {}
+                        }
+
+                        System.out.println("\n\nReturning to game...\n");
+                    }
+                    else {
+                        System.out.println("You can't use that.");
+                    }
                     break;
+
 
                 case "activatecmd":
                     cmdOn = true;
@@ -162,32 +194,7 @@ public class OSFinalProject {
                         } else System.out.println("I don't understand that command.");
                     } else System.out.println("I don't understand that command.");
                     break;
-
-                // NEW PERFORMANCE MONITOR COMMAND
-                case "perf":
-                    System.out.println("\n=== PERFORMANCE MONITOR ===");
-                    System.out.println("Press ENTER at any time to return to the game.\n");
-                    Thread stopper = new Thread(() -> scanner.nextLine());
-                    stopper.start();
-
-                    while (stopper.isAlive()) {
-                        MemoryUsage heap = memoryBean.getHeapMemoryUsage();
-                        double cpuLoad = osBean.getProcessCpuLoad() * 100;
-                        long cpuTimeMs = osBean.getProcessCpuTime() / 1_000_000;
-
-                        System.out.printf("Heap: %d MB / %d MB | CPU: %.2f%% | CPU Time: %d ms%n",
-                                heap.getUsed() / 1_000_000,
-                                heap.getMax() / 1_000_000,
-                                cpuLoad,
-                                cpuTimeMs
-                        );
-
-                        try { Thread.sleep(1000); } catch (InterruptedException e) {}
-                    }
-
-                    System.out.println("\nReturning to game...\n");
-                    break;
-
+                    
                 case "exit":
                 case "quit":
                     exitGame = true;
