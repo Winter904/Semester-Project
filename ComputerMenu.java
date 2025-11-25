@@ -33,7 +33,7 @@ public class ComputerMenu implements Runnable {
                     break;
             }
         }
-        scanner.close();
+        //scanner.close();
     }
 
     private void simulateOrder() {
@@ -48,4 +48,3 @@ public class ComputerMenu implements Runnable {
         deliveryThread.start();
     }
 }
-
