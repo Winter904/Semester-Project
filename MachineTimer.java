@@ -19,7 +19,7 @@ public class MachineTimer extends Thread {
 
             // This is the new part: The message that appears after the machine turns off
             System.out.println("- - -");
-            System.out.println("The machine sputters and breaks down!");
+            System.out.println("A machine sputters and breaks down!");
             
             // After turning off the machine, we print a new line and the prompt.
             System.out.print("> "); 

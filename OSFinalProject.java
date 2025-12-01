@@ -23,6 +23,7 @@ public class OSFinalProject {
         // GAMEOBJECT LIST
         GameMachine copperMachine = new GameMachine("Copper Machine", "A large, quiet, copper machine with buttons and levers.", "A large, humming, copper machine with buttons and levers.", false);
         GameMachine rustyMachine = new GameMachine("Rusty Machine", "An old, quiet, rusty steel machine worn with use.", "An old, rumbling, rusty steel machine barely functioning.", false);
+        GameMachine heavyDutyMachine = new GameMachine("Heavy Duty Machine", "An large, quiet, industrial machine that looks like it would take a lot to power.", "An large, rumbling, industrial machine. It looks like it's taking a lot of juice to power.", false);
         GameObject sign = new GameObject("Wooden Sign", "A wooden sign with faded text.", false);
         GameContainer chest = new GameContainer("Iron Chest", "An old rusting chest of some kind. It appears to be closed", "An old rusting chest of some kind. It has been opened.","An old rusting chest of some kind. It has a silver key sitting inside.", false, false);
 
@@ -33,6 +34,7 @@ public class OSFinalProject {
         
         startRoom.addMachine(copperMachine);
         startRoom.addMachine(rustyMachine);
+        startRoom.addMachine(heavyDutyMachine);
         startRoom.addObject(sign);
         startRoom.addContainer(chest);
         chest.addItem(silverKey);
@@ -42,6 +44,7 @@ public class OSFinalProject {
         System.out.println("There is a worn sign here.");
         System.out.println("There is a Copper Machine here.");
         System.out.println("There is a Rusty Machine here.");
+        System.out.println("There is a Heavy Duty Machine here.");
         System.out.println("There is a Rusty Chest here.");
         System.out.println("There is an old boxy computer here.");
         System.out.println("There is glitchy digital panel attached to the wall here.");
@@ -102,9 +105,32 @@ public class OSFinalProject {
 
                 case "turn":
                     if (target.equals("on machine")) {
-                        if (!copperMachine.isOn()) new MachineTimer(copperMachine, 10000).start();
-                        System.out.println(copperMachine.turnMachineOn());
+                        System.out.println("Which machine would you like to turn on?");
+                        String whichMachine = scanner.nextLine().toLowerCase();
+                        if (whichMachine.equals("copper") || whichMachine.equals("copper machine")) {
+                            if (!copperMachine.isOn()) new MachineTimer(copperMachine, 15000).start();
+                            System.out.println(copperMachine.turnMachineOn());
+                        } else if (whichMachine.equals("rusty") || whichMachine.equals("rusty machine")) {
+                            if (!rustyMachine.isOn()) new MachineTimer(rustyMachine, 4000).start();
+                            System.out.println(rustyMachine.turnMachineOn());
+                        } else if (whichMachine.equals("large") || whichMachine.equals("large machine")) {
+                            if (!heavyDutyMachine.isOn()) new MachineTimer(heavyDutyMachine, 10000).start();
+                            System.out.println(heavyDutyMachine.turnMachineOn());
+                        } else {
+                            break;
+                        }
                     } else if (target.equals("off machine")) {
+                        System.out.println("Which machine would you like to turn on?");
+                        String whichMachine = scanner.nextLine().toLowerCase();
+                        if (whichMachine.equals("copper") || whichMachine.equals("copper machine")) {
+                            System.out.println(copperMachine.turnMachineOff());
+                        } else if (whichMachine.equals("rusty") || whichMachine.equals("rusty machine")) {
+                            System.out.println(rustyMachine.turnMachineOff());
+                        } else if (whichMachine.equals("large") || whichMachine.equals("large machine")) {
+                            System.out.println(heavyDutyMachine.turnMachineOff());
+                        } else {
+                            break;
+                        }
                         System.out.println(copperMachine.turnMachineOff());
                     } else System.out.println("You can't turn that.");
                     break;
